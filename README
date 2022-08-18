@@ -1,0 +1,26 @@
+Project Members: Jeet Nair
+ISU ID: 554751229
+
+Build Instructions:
+Upon unzipping the folder in Pyrite, change into the directory of the project and 
+simply run 'make all'.  The make file will construct the executable.  You then must
+run the command ./test > 'file' where 'file' is a .ppm file of your choice.  Finally,
+you may view the ppm file however you may so choose, my reccomendation if you are able
+to download the ppm file easily is to use https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html
+as it was quite easy for me to check how my program worked with this site.
+
+
+How to Add Spheres and Triangles to the World and Apply Textures to Them:
+Starting at line 35 in the main.cpp file, the hitlist world is created which stores all of the objects to be raycasted against in the "world".
+Using this example 'auto ground = make_shared<lambertian>(color(0.8, 0.8, 0.0));' we name this texture ground and state that it is using a lambertian
+material as it's texture inside the <>.  We specifiy what shading of color we want with color(r,g,b) with r, g, and b all being between 0 and 1.  Once this is done, we've established the texture name for the object in question, we then move on to generate an object in the "world".  Using the
+example of 'world.add(make_shared<sphere>(point3(0.0, -100.5, -1.0), 100.0, ground));', we add the object to our hitlist 'world' and specify in this
+case that it is a 'sphere' object.  At that point, we state what the coordinates in the world for the center of the sphere are in the point3(x,y,z) portion, the 2nd double represents the radius of the sphere, and the 3rd part we choose what we decided for the texture earlier.
+
+Triangles follow a similar method but instead are added with world.add(make_shared<triangle>(point3(-0.5f, 0, 0), point3(0.5f, 0, 0), point3(0, 0.8f, 0), ground)); where the 3 point3s are the points on an xyz plane and the final element is the texture decided earlier.  
+
+How to Change Depth and Sample Rate:
+In the main.cpp at lines 32 and 33 there are 2 consts for the sample rate and the depth.  Modifying those variables will allow you to alter
+the sample rate and recursive depth of the render.
+
+NOTE: The triangles are working but I haven't been able to work out applying them on the scene.  They show up if I make very small ones if I don't put spheres on the scene, but it seems to bug out when I try to make it a floor.  As such, I have replaced the floor with a sphere since I wanted a visible floor.
